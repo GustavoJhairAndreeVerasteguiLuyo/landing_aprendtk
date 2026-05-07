@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APRENDTK | Academia de Tecnología y Ciencias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: #00d4ff;
+      border-radius: 10px;
+    }
+
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      background: rgba(5, 8, 22, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #00d4ff;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #00d4ff;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 8% 60px;
+      background:
+        radial-gradient(circle at top left, rgba(0,212,255,0.25), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(128,0,255,0.25), transparent 30%),
+        #050816;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+    }
+
+    .hero-text h1 {
+      font-size: 4rem;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #00d4ff;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #d0d0d0;
+      margin-bottom: 35px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.4s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00d4ff, #7b2cff);
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,212,255,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,212,255,0.5);
+    }
+
+    .btn-secondary {
+      border: 2px solid #00d4ff;
+      color: #00d4ff;
+      background: transparent;
+    }
+
+    .btn-secondary:hover {
+      background: #00d4ff;
+      color: #050816;
+      transform: translateY(-5px);
+    }
+
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 500px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .code-window {
+      background: #0f172a;
+      border-radius: 18px;
+      padding: 25px;
+      font-family: monospace;
+      color: #00ffae;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    section {
+      padding: 100px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #c5c5c5;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.8;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .course-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 25px;
+      padding: 35px;
+      transition: 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: rgba(0,212,255,0.15);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
+    }
+
+    .course-card:hover {
+      transform: translateY(-10px);
+      border-color: #00d4ff;
+      box-shadow: 0 15px 50px rgba(0,212,255,0.2);
+    }
+
+    .course-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .course-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .course-card p {
+      color: #d0d0d0;
+      line-height: 1.8;
+    }
+
+    .stats {
+      background: linear-gradient(135deg, #091322, #0d1f38);
+      border-radius: 35px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding: 60px;
+      text-align: center;
+    }
+
+    .stat-box h3 {
+      font-size: 3rem;
+      color: #00d4ff;
+      margin-bottom: 10px;
+    }
+
+    .stat-box p {
+      color: #d5d5d5;
+      font-size: 1rem;
+    }
+
+    .why-us {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .why-item {
+      background: rgba(255,255,255,0.04);
+      padding: 25px;
+      border-radius: 20px;
+      border-left: 5px solid #00d4ff;
+    }
+
+    .why-item h4 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .contact {
+      text-align: center;
+      background:
+        radial-gradient(circle at top, rgba(0,212,255,0.2), transparent 30%),
+        #050816;
+    }
+
+    .contact-box {
+      max-width: 850px;
+      margin: auto;
+      background: rgba(255,255,255,0.05);
+      border-radius: 35px;
+      padding: 60px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-box h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-box p {
+      color: #d0d0d0;
+      line-height: 1.8;
+      margin-bottom: 35px;
+    }
+
+    footer {
+      padding: 30px 8%;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: #b5b5b5;
+    }
+
+    @media(max-width: 900px) {
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+
+      .section-title h2,
+      .contact-box h2 {
+        font-size: 2.2rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    @media(max-width: 600px) {
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .contact-box,
+      .stats {
+        padding: 35px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">APRENDTK</div>
+
+      <ul class="nav-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#cursos">Cursos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="hero-content">
+
+      <div class="hero-text">
+        <h1>
+          Impulsa tu futuro con <span>Tecnología</span>,
+          <span>Robótica</span> y
+          <span>Inteligencia Artificial</span>
+        </h1>
+
+        <p>
+          En APRENDTK formamos a la nueva generación de innovadores,
+          científicos e ingenieros. Aprende Programación, Mecatrónica,
+          Matemática Pura, Física Pura y desarrollo de Inteligencia Artificial
+          mediante proyectos reales, laboratorios modernos y metodologías avanzadas.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#cursos" class="btn btn-primary">Explorar Cursos</a>
+          <a href="#contacto" class="btn btn-secondary">Inscribirme</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="hero-card">
+          <div class="code-window">
+&lt;AI_Project&gt;<br>
+&nbsp;&nbsp;while(student.learning){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;buildRobots();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;solvePhysics();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;masterMath();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;createApps();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;trainAIModels();<br>
+&nbsp;&nbsp;}<br>
+&lt;/AI_Project&gt;
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="cursos">
+    <div class="section-title">
+      <h2>Nuestras Especialidades</h2>
+      <p>
+        Diseñamos programas académicos modernos orientados al pensamiento lógico,
+        innovación tecnológica y resolución de problemas reales.
+      </p>
+    </div>
+
+    <div class="courses-grid">
+
+      <div class="course-card">
+        <div class="course-icon">💻</div>
+        <h3>Programación</h3>
+        <p>
+          Aprende HTML, CSS, JavaScript, Python, Java, desarrollo web,
+          algoritmos, estructuras de datos y creación de aplicaciones modernas.
+        </p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon">🤖</div>
+        <h3>Robótica</h3>
+        <p>
+          Diseña robots inteligentes utilizando sensores, Arduino,
+          automatización, visión artificial y electrónica aplicada.
+        </p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon">⚙️</div>
+        <h3>Mecatrónica</h3>
+        <p>
+          Integra mecánica, electrónica y software para desarrollar
+          sistemas automatizados de alto impacto tecnológico.
+        </p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon">📐</div>
+        <h3>Matemática Pura</h3>
+        <p>
+          Domina álgebra, cálculo, trigonometría, geometría analítica,
+          razonamiento matemático y resolución avanzada de problemas.
+        </p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon">🧪</div>
+        <h3>Física Pura</h3>
+        <p>
+          Comprende mecánica, electricidad, magnetismo, óptica y física moderna
+          mediante experimentos y simulaciones interactivas.
+        </p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon">🧠</div>
+        <h3>Inteligencia Artificial</h3>
+        <p>
+          Construye modelos de Machine Learning, Deep Learning y sistemas de IA
+          utilizando Python, TensorFlow y tecnologías de última generación.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="stats">
+      <div class="stat-box">
+        <h3>500+</h3>
+        <p>Estudiantes Formados</p>
+      </div>
+
+      <div class="stat-box">
+        <h3>20+</h3>
+        <p>Proyectos Tecnológicos</p>
+      </div>
+
+      <div class="stat-box">
+        <h3>95%</h3>
+        <p>Satisfacción Académica</p>
+      </div>
+
+      <div class="stat-box">
+        <h3>100%</h3>
+        <p>Aprendizaje Práctico</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros">
+    <div class="section-title">
+      <h2>¿Por Qué Elegir APRENDTK?</h2>
+      <p>
+        Nuestra academia combina ciencia, ingeniería y tecnología para formar
+        líderes capaces de transformar el futuro.
+      </p>
+    </div>
+
+    <div class="why-us">
+
+      <div class="why-list">
+
+        <div class="why-item">
+          <h4>🚀 Aprendizaje Basado en Proyectos</h4>
+          <p>
+            Los estudiantes desarrollan soluciones reales desde el primer día.
+          </p>
+        </div>
+
+        <div class="why-item">
+          <h4>🔬 Laboratorios Tecnológicos</h4>
+          <p>
+            Utilizamos herramientas modernas para programación, electrónica y robótica.
+          </p>
+        </div>
+
+        <div class="why-item">
+          <h4>🌐 Educación Orientada al Futuro</h4>
+          <p>
+            Preparamos estudiantes para carreras STEM y empleos tecnológicos globales.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="hero-card">
+        <h2 style="margin-bottom: 25px; color:#00d4ff;">
+          Formación de Alto Nivel
+        </h2>
+
+        <p style="line-height: 1.9; color:#d7d7d7;">
+          APRENDTK impulsa el pensamiento crítico, la creatividad y la innovación.
+          Nuestro enfoque integra programación, ciencias exactas e inteligencia artificial
+          para desarrollar habilidades altamente demandadas en el mundo actual.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="contact-box">
+      <h2>Conviértete en el próximo innovador tecnológico</h2>
+
+      <p>
+        Inscríbete hoy y comienza tu camino en el mundo de la programación,
+        la robótica, la ingeniería y la inteligencia artificial.
+      </p>
+
+      <div class="hero-buttons" style="justify-content:center;">
+        <a href="https://wa.me/51991734791" class="btn btn-primary">
+          Contactar por WhatsApp
+        </a>
+
+        <a href="mailto:contacto@aprendtk.com" class="btn btn-secondary">
+          Enviar Correo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 APRENDTK - Academia de Tecnología y Ciencias</p>
+    <p>Programación | Robótica | IA | Matemática | Física</p>
+  </footer>
+
+</body>
+</html>
